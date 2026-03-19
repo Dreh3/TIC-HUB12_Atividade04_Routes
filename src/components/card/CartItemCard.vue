@@ -18,12 +18,10 @@
                         <span class="pi pi-minus"></span>
                     </template>
                 </InputNumber>
-            <div class="flex flex-row gap-2">
                 <div class="flex flex-row-reverse">
                     <!-- pode colocar o button no div e modificá-lo -->
                     <Button @click="delItem(item.product!)">Excluir item</Button>
                 </div>
-            </div>
         </template>
     </Card>
 </template>
@@ -32,7 +30,10 @@
 import {type CartItem} from '@/model/cart.model'
 import type {Product} from '@/model/product.model'
 import { InputNumber } from 'primevue';
-import {defineComponent, type PropType} from 'vue'
+import {defineComponent, type PropType, ref, onMounted, onUnmounted} from 'vue'
+let intervalid: number;
+
+
 export default defineComponent({
     components:{
         InputNumber,
@@ -46,12 +47,12 @@ export default defineComponent({
             type: Object as PropType<Product>
         }
     },
-    emits:["deletar", "add", "rem"],
+    emits:["deletar"],
     methods:{
         delItem(product:Product){
             this.$emit("deletar",product)
         },
-
-    }
+    },
 })
+
 </script>

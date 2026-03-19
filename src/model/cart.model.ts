@@ -24,7 +24,7 @@ export class Cart{
         }
     }
 
-    remItem(product:Product){
+    decItem(product:Product){
         const itemFound = this.listProducts.findIndex((item) => item.product.name === product.name)
         if(itemFound>-1 && this.listProducts[itemFound]){ //verifico se encontrou índice válido e se há algo nesse índice
             if(this.listProducts[itemFound].quantity-1 <= 0){

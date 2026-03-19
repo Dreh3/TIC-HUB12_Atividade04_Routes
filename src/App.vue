@@ -20,8 +20,8 @@ export default{
     addItem(product: Product){
       this.cart.addToCart(product)
     },
-    remItem(product: Product){
-      this.cart.remItem(product)
+    decItem(product: Product){
+      this.cart.decItem(product)
     },
     delItem(product: Product){
       this.cart.delItem(product)
@@ -50,7 +50,6 @@ export default{
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 bg-gray-100 p-4">
           <div v-for="item in items" :key="item.product.id" >
             <CartItemCard :item="item" @deletar="delItem" />
-            <!-- <h3>Quantidade: {{item.quantity}}</h3> -->
           </div>
         </section>
       </template>
