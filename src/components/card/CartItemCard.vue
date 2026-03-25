@@ -3,25 +3,25 @@
         <template #content>
             <div class="flex flex-row gap-2">
                 <img :src="'https://picsum.photos/25'" class="w-20"/>
-                <!-- colocar acesso às propriedades de product nos métodos -->
                 <h3 class="flex flex-1">{{item.product.name}}</h3>
                 <p>R$: {{item?.product.price.toFixed(2).replace(',','.')}}</p>  
             </div>
             
         </template>
         <template #footer>
-                <InputNumber v-model="item.quantity" showButtons buttonLayout="horizontal"  inputClass="w-10 text-sm" :min="1" class="h-8" >
+                <InputNumber v-model="item.quantity" @update:modelValue="(val) => changeQuantity(item, val as number)" showButtons buttonLayout="horizontal"  inputClass="w-10 text-sm" :min="1" :max="99" class="h-8" >
                     <template #incrementbuttonicon >
                         <span class="pi pi-plus"></span>
                     </template>
                     <template #decrementbuttonicon >
-                        <span class="pi pi-minus"></span>
+                        <span class="pi pi-minus" ></span>
                     </template>
                 </InputNumber>
                 <div class="flex flex-row-reverse">
                     <!-- pode colocar o button no div e modificá-lo -->
                     <Button @click="delItem(item.product!)">Excluir item</Button>
                 </div>
+                <!-- <p >Quantidade: {{ item.quantity }}</p> -->
         </template>
     </Card>
 </template>
@@ -44,13 +44,20 @@ export default defineComponent({
             required: true,
         },
         product:{
-            type: Object as PropType<Product>
         }
     },
-    emits:["deletar"],
+    emits:["deletar", "addItem", "decItem"],
     methods:{
         delItem(product:Product){
             this.$emit("deletar",product)
+        },
+        changeQuantity(item: CartItem, val:number){
+            if(item.quantity<val){
+                this.$emit("addItem", item.product)
+            }else if(item.quantity>val){
+                this.$emit("decItem", item.product)
+            }
+           
         },
     },
 })

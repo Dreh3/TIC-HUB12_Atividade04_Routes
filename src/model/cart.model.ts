@@ -19,9 +19,11 @@ export class Cart{
             this.listProducts = this.listProducts.map((i) => {
             return i.product.name === product.name ? {...i, quantity: i.quantity + 1} : i
             })
+            // this.listProducts[itemFound].quantity += 1
         }else{
             this.listProducts.push({product, quantity: 1})
         }
+        this.listProducts = [...this.listProducts]
     }
 
     decItem(product:Product){
@@ -36,6 +38,7 @@ export class Cart{
             }
             
         }
+        this.listProducts = [...this.listProducts] //funciona para atualizar o view no dataview
     }
 
     delItem(product:Product){
@@ -43,6 +46,7 @@ export class Cart{
         if(itemFound>-1 && this.listProducts[itemFound]){ 
             this.listProducts.splice(itemFound,1) 
         }
+        this.listProducts = [...this.listProducts]
     }
 
     getTotalItems():number{
@@ -66,6 +70,14 @@ export class Cart{
 
         return this.cartFinalPrice;
 
+    }
+
+    getTotalQuantity(product: Product): number{
+        const itemFound = this.listProducts.findIndex((item) => item.product.id === product.id)
+        if(itemFound > -1 && this.listProducts[itemFound]){
+            return this.listProducts[itemFound].quantity
+        }
+        return 0
     }
 
 }
