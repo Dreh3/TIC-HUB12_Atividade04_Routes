@@ -12,7 +12,7 @@ import { Product } from '@/model/product.model';
 import {defineComponent, type PropType} from 'vue'
 import ProductCard from '@/components/card/ProductCard.vue'
 import ProductDetail from './ProductDetail.vue';
-import {getProducts} from '@/store/productslist'
+import {getProducts} from '../store/productslist';
 
 export default defineComponent({
     

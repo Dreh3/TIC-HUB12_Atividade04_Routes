@@ -10,7 +10,7 @@ export class Cart{
     public cartTotal: number = 0.0;
     public cartFinalPrice: number = 0.0;
 
-    constructor(public listProducts:CartItem[]=[]){}
+    public listProducts: CartItem[] = []
 
     addToCart(product: Product){
         //procuro o item na lista existente
@@ -72,12 +72,6 @@ export class Cart{
 
     }
 
-    getTotalQuantity(product: Product): number{
-        const itemFound = this.listProducts.findIndex((item) => item.product.id === product.id)
-        if(itemFound > -1 && this.listProducts[itemFound]){
-            return this.listProducts[itemFound].quantity
-        }
-        return 0
-    }
+    
 
 }
